@@ -1,5 +1,5 @@
 package com.revature.javaCoreAssignment;
-
+import com.revature.Q11.*;
 public class Driver {
 	public static void main(String[] args) {
 		System.out.println("Question 1");
@@ -19,9 +19,28 @@ public class Driver {
 		}
 		System.out.println("");
 		System.out.println("Question 3");	
-		System.out.println("");
+		String str = "cabernet";
+		Q3 myQ3 = new Q3();
+		System.out.println(myQ3.wordReverse(str));
 		System.out.println("Question 4");
 		Q4 myQ4 = new Q4();
 		System.out.println(myQ4.factorial(10));
+		System.out.println("Question 5");
+		System.out.println("Question 6");
+		Q6 myQ6 = new Q6();
+		myQ6.modulus(24);
+		Q11 myQ11 = new Q11();
+		myQ11.f1 = 10;
+		myQ11.f2 = 12;
+		Q12 myQ12 = new Q12();
+		int[] myArr = myQ12.populateArray();
+		myQ12.printEvens(myArr);
+		try {
+			Q15 myQ15 = new Q15();
+			myQ15.display();
+		}catch (Exception e) {
+			System.out.println("Invalid input");
+		}
+		
 	}
 }
