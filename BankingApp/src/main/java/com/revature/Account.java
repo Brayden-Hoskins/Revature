@@ -30,10 +30,12 @@ public class Account {
 		return 0;
 	}
 	public int setAccountNum(int x) {
-		return this.accountNum = x;
+		this.accountNum = x;
+		return accountNum ;
 	}
 	public boolean setJointAccount(boolean b) {
-		return this.isJointAccount = b;
+		this.isJointAccount = b;
+		return isJointAccount;
 	}
 	
 }
