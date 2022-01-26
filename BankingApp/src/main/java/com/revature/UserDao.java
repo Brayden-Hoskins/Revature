@@ -33,15 +33,15 @@ public class UserDao {
 		
 		return true;
 	}
-	
-	public void signUp(String username, String password) {
+
+	public void signUp(String username, String password, int role) {
 
 		try {
 			Connection c = ConnectionManager.getConnection();
 			Statement statement = c.createStatement();
 			
-			int rowsAffected = statement.executeUpdate("INSERT INTO logininfo(username,password) VALUES (\'" + username 
-					+ "\', \'" + password + "\')");
+			int rowsAffected = statement.executeUpdate("INSERT INTO logininfo(username,password,role) VALUES (\'" + username 
+					+ "\', \'" + password + "\', \'"+ role + "\')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

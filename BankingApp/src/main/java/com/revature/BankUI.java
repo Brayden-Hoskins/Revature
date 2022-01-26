@@ -3,12 +3,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 public class BankUI {
-	public static Map<String,String> loginInfo = new HashMap<String,String>();
+	//public static Map<String,String> loginInfo = new HashMap<String,String>();
+	public static String loggedInUsername;
 	/*public void populateLogin(String file){
 	    try {
 	        FileReader filereader = new FileReader(file);
@@ -73,6 +78,7 @@ public class BankUI {
 		System.out.println("Enter Password: ");
 		String password = sc.nextLine();
 		validateLogin(username,password);
+		
 	}
 	public void register() {
 		Scanner sc = new Scanner(System.in);
@@ -85,16 +91,22 @@ public class BankUI {
 		case 1:
 			Customer c1 = new Customer();
 			c1.registerCustomer();
+			System.out.println("Please login");
+			login();
 			//registerCustomer();
 			break;
 		case 2:
 			Employee e1 = new Employee();
 			e1.registerEmployee();
+			System.out.println("Please login");
+			login();
 			//registerEmployee();
 			break;
 		case 3:
 			Admin a1 = new Admin();
 			a1.registerAdmin();
+			System.out.println("Please login");
+			login();
 			//registerAdmin();
 			break;
 		}	
@@ -102,12 +114,46 @@ public class BankUI {
 		
 	}
 	public boolean validateLogin(String user, String pass) {
-		if(loginInfo.containsKey(user) && loginInfo.get(user).equals(pass)) {
-			return true;
-		}else {
-			System.out.println("Invalid username or password");
-			return false;
-		}
+		try {
+			Connection c = ConnectionManager.getConnection();
+			PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM logininfo WHERE username = ? AND password = ?");
+			preparedStatement.setString(1, user);
+			preparedStatement.setString(2, pass);
+			loggedInUsername = user;
+			ResultSet results = preparedStatement.executeQuery();
+			if(results.next()) {
+				System.out.println("Login successful!");
+				int ans = results.getInt("role");
+				switch (ans) {
+				case 1:
+					Customer c1 = new Customer();
+					c1.customerMenu();
+					return true;
+					//registerCustomer();
+					
+				case 2:
+					Employee e1 = new Employee();
+					e1.employeeMenu();
+					return true;
+					//registerEmployee();
+					
+				case 3:
+					Admin a1 = new Admin();
+					a1.adminMenu();
+					 return true;
+					//registerAdmin();
+					
+				}		
+			}else {
+				System.out.println("Invalid username or password");
+				login();
+				return false;	
+				
+		}} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			
-	}
+		}
+		return false;
+}
 }

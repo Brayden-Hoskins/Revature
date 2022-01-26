@@ -1,0 +1,5 @@
+2022-01-26 05:29:13.406 [main] DEBUG com.revature.Customer - test2 test registered an Customer account
+2022-01-26 05:29:52.824 [main] DEBUG com.revature.Customer - test2 applied for an account
+2022-01-26 05:38:45.087 [main] DEBUG com.revature.Employee - mitch clark registered an Employee account
+2022-01-26 05:39:08.239 [main] DEBUG com.revature.Employee - null null viewed all accounts
+2022-01-26 05:39:29.484 [main] DEBUG com.revature.Employee - null null approved account 7
